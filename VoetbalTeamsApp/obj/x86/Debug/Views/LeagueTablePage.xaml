@@ -1,0 +1,148 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="VoetbalTeamsApp.Views.LeagueTablePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VoetbalTeamsApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+    xmlns:gridPrimitives="using:Telerik.UI.Xaml.Controls.Grid.Primitives"
+    xmlns:telerikGrid="using:Telerik.UI.Xaml.Controls.Grid"
+    xmlns:dataCore="using:Telerik.Data.Core"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <RelativePanel x:ConnectionId='2'                                                           >
+            <CommandBar x:ConnectionId='14' x:Name="commandBar"
+                            DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='20'
+                                                                     
+                        Icon="add"
+                        Label="New Club"/>
+                <AppBarButton x:ConnectionId='21'
+                                                                  
+                        Icon="Delete"
+                        Label="Delete Club"
+                        ToolTipService.ToolTip="Delete Selected Club"/>
+                <AppBarButton x:ConnectionId='22'
+                                                                
+                        Icon="Zoom"
+                        Label="Show Club"
+                        ToolTipService.ToolTip="Show Selected Club"/>
+            </CommandBar>
+            <StackPanel x:ConnectionId='15'
+                    x:Name="newClubPanel"
+                    Orientation="Horizontal"
+                    x:Load="False"                                        
+                    RelativePanel.Below="commandBar">
+
+                <TextBox x:ConnectionId='17'
+                         Header="Club Name"
+                         PlaceholderText="Club name"
+                         Margin="8,8,16,8"
+                         MinWidth="120"
+                                                                                                                 />
+
+                <AppBarButton x:ConnectionId='18'
+                        Label="Create Club"
+                                                                   
+                        Icon="Save" VerticalAlignment="Center"/>
+                <AppBarButton x:ConnectionId='19'
+                        Label="Cancel"
+                                                                     
+                        Icon="Cancel" VerticalAlignment="Center"/>
+            </StackPanel>
+            <telerikGrid:RadDataGrid x:ConnectionId='16' x:Name="grid" UserEditMode="Inline" AutoGenerateColumns="False"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.Below="newClubPanel"
+                        ColumnResizeHandleDisplayMode="Always"
+                        UserGroupMode="Disabled"
+                        UserFilterMode="Disabled"
+                        UserSortMode="Multiple"
+                                                                                   
+                                                                       >
+                <telerikGrid:RadDataGrid.Columns>
+                    <telerikGrid:DataGridTextColumn PropertyName="Name"/>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="Won"/>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="Drawn"/>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="Lost"/>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="Points">
+                        <telerikGrid:DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="gridPrimitives:DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FF338D18"/>
+                            </Style>
+                        </telerikGrid:DataGridTextColumn.HeaderStyle>
+                    </telerikGrid:DataGridNumericalColumn>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="GF"/>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="GA"/>
+                    <telerikGrid:DataGridNumericalColumn CanUserEdit="False" PropertyName="GD"/>
+                    <!--telerikGrid:DataGridComboBoxColumn PropertyName="Position" ItemsSource="{x:Bind ViewModel.Positions}" / 
+                        Setting Columns standard width can be done with Width="70" SizeMode="Fixed" -->
+                </telerikGrid:RadDataGrid.Columns>
+                <telerikGrid:RadDataGrid.SortDescriptors>
+                    <dataCore:PropertySortDescriptor PropertyName="Points" SortOrder="Descending"/>
+                    <dataCore:PropertySortDescriptor PropertyName="GD" SortOrder="Descending"/>
+                </telerikGrid:RadDataGrid.SortDescriptors>
+            </telerikGrid:RadDataGrid>
+        </RelativePanel>
+        <RelativePanel x:ConnectionId='3'                                                                >
+            <CommandBar x:ConnectionId='4'  x:Name="BackBar" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='13'
+                                                          
+                    Icon="Back"
+                    Label="Go back"/>
+            </CommandBar>
+            <StackPanel x:ConnectionId='5' x:Name="Club" Orientation="Horizontal" RelativePanel.Below="BackBar">
+                <TextBlock x:ConnectionId='8'                                                          FontSize="50" MinWidth="100"/>
+
+                <TextBox x:ConnectionId='9'
+                     Header="First name"
+                     PlaceholderText="FirstName"
+                     Margin="8,8,16,8"
+                     MinWidth="120"
+                                                                                                                             />
+                <TextBox x:ConnectionId='10'
+                     Header="Last name"
+                     PlaceholderText="LastName"
+                     Margin="0,8,16,8"
+                     MinWidth="120"
+                                                                                                                            />
+                <TextBox x:ConnectionId='11'
+                     Header="Age"
+                     PlaceholderText="18"
+                     Margin="0,8,16,8"
+                     MinWidth="50"
+                                                                                                                       />
+                <TextBox x:ConnectionId='12'
+                     Header="Salary"
+                     PlaceholderText="2000"
+                     Margin="0,8,16,8"
+                                                                                                                          />
+            </StackPanel>
+            <telerikGrid:RadDataGrid x:ConnectionId='6'
+                x:Name="DataGrid"
+                BorderThickness="0"
+                AutoGenerateColumns="False"
+                GridLinesVisibility="None"
+                GroupPanelPosition="Left"
+                UserFilterMode="Disabled"
+                UserGroupMode="Disabled"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="Club" 
+                                                                                  >
+                <telerikGrid:RadDataGrid.Columns>
+                    <telerikGrid:DataGridNumericalColumn PropertyName="Id" CanUserEdit="False" />
+                    <telerikGrid:DataGridTextColumn PropertyName="FirstName"/>
+                    <telerikGrid:DataGridTextColumn PropertyName="LastName"/>
+                    <telerikGrid:DataGridNumericalColumn PropertyName="Age"/>
+                    <telerikGrid:DataGridNumericalColumn PropertyName="Salary"/>
+                    <telerikGrid:DataGridComboBoxColumn x:ConnectionId='7' PropertyName="Position"                                               />
+                </telerikGrid:RadDataGrid.Columns>
+            </telerikGrid:RadDataGrid>
+        </RelativePanel>
+    </Grid>
+</Page>
+
